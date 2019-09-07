@@ -1,5 +1,6 @@
 <template>
     <div>
+
         <TableData
             url="/contacts.json"
             :sort="choice"
@@ -24,7 +25,6 @@
             id="sort-by"
             v-model="choice"
         >
-            <option value="">--Please choose an option--</option>
             <option
                 v-for="choice in sortChoices"
                 :value="choice"
