@@ -13,19 +13,13 @@
 
         @Watch('sort')
         private sortData() {
-            console.log(this.sort);
+            this.data = sortBy(this.data, this.sort);
         }
 
         private created() {
             fetch(this.url)
                 .then((response) => response.json())
-                .then((response) => {
-                    if (this.sort) {
-                        this.data = sortBy(response, this.sort);
-                    } else {
-                        this.data = response;
-                    }
-                });
+                .then((response) => (this.data = response));
         }
 
         private render() {

@@ -3,8 +3,13 @@ export function sortBy(arr: any, type: string) {
         let objA;
         let objB;
 
-        objA = a[type].toUpperCase();
-        objB = b[type].toUpperCase();
+        if (type === 'age') {
+            objA = a[type];
+            objB = b[type];
+        } else {
+            objA = a[type].toUpperCase();
+            objB = b[type].toUpperCase();
+        }
 
         if (objA < objB) {
             return -1;
