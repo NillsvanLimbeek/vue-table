@@ -1,4 +1,4 @@
-export function sortBy(arr: any, type: string) {
+export function sortBy(arr: any, type: string): any[] {
     return arr.sort((a: any, b: any) => {
         let objA;
         let objB;

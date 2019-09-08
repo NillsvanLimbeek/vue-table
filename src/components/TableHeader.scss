@@ -1,0 +1,20 @@
+.table-header {
+    display: flex;
+}
+
+.table-header__item {
+    display: flex;
+    justify-content: space-between;
+
+    border: 1px solid black;
+    border-width: 1px 0 1px 1px;
+    padding: 5px 10px;
+}
+
+.table-header__item:last-child {
+    border-right: 1px solid black;
+}
+
+.table-header__item-icon--rotated {
+    transform: rotate(180deg);
+}

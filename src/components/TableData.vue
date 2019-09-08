@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
-    import { sortBy } from '@/utils/sortBy';
+    import { sortBy } from '@/utils/sort-by';
     import { Watch } from 'vue-property-decorator';
 
     @Component({})
@@ -13,7 +13,9 @@
 
         @Watch('sort')
         private sortData() {
-            this.data = sortBy(this.data, this.sort);
+            this.sort[0] === '-'
+                ? this.data.reverse()
+                : (this.data = sortBy(this.data, this.sort));
         }
 
         private created() {
