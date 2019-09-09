@@ -21,6 +21,14 @@
                 </div>
             </template>
         </TableData>
+
+        <h2>Controls</h2>
+        <ItemCheckbox
+            v-for="(item, index) in tableOrder"
+            :key="index"
+            :title="item"
+            @update-table="updateTable"
+        />
     </div>
 </template>
 
@@ -30,32 +38,40 @@
     const TableData = () => import('./TableData.vue');
     const TableHeader = () => import('./TableHeader.vue');
     const TableItem = () => import('./TableItem.vue');
+    const ItemCheckbox = () => import('./controls/ItemCheckbox.vue');
 
     @Component({
         components: {
             TableData,
             TableHeader,
             TableItem,
+            ItemCheckbox,
         },
     })
     export default class Table extends Vue {
-        private sortChoices: string[] = ['firstName', 'lastName', 'age'];
         private choice: string | null = null;
-
         private tableOrder: any[] = [
-            { title: 'firstName', width: 150 },
-            { title: 'lastName', width: 150 },
-            { title: 'age', width: 150 },
-            { title: 'company', width: 150 },
-            { title: 'email', width: 150 },
-            { title: 'phone', width: 150 },
-            { title: 'address', width: 150 },
+            { title: 'firstName', width: 150, visible: true },
+            { title: 'lastName', width: 150, visible: true },
+            { title: 'age', width: 150, visible: true },
+            { title: 'company', width: 150, visible: true },
+            { title: 'email', width: 150, visible: true },
+            { title: 'phone', width: 150, visible: true },
+            { title: 'address', width: 150, visible: true },
         ];
 
         private changeSort(sortOrder: string) {
             this.choice === sortOrder
                 ? (this.choice = `-${sortOrder}`)
                 : (this.choice = sortOrder);
+        }
+
+        private updateTable(name: string) {
+            const tableProperty = this.tableOrder.find((x) => x.title === name);
+
+            tableProperty.visible
+                ? (tableProperty.visible = true)
+                : (tableProperty.visible = false);
         }
     }
 </script>
