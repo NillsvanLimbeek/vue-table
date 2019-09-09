@@ -23,12 +23,7 @@
         </TableData>
 
         <h2>Controls</h2>
-        <ItemCheckbox
-            v-for="(item, index) in tableOrder"
-            :key="index"
-            :title="item"
-            @update-table="updateTable"
-        />
+        <ItemCheckbox @update-table="updateTable" />
     </div>
 </template>
 
@@ -69,9 +64,11 @@
         private updateTable(name: string) {
             const tableProperty = this.tableOrder.find((x) => x.title === name);
 
-            tableProperty.visible
-                ? (tableProperty.visible = true)
-                : (tableProperty.visible = false);
+            if (tableProperty) {
+                this.tableOrder = this.tableOrder.filter((x) => x.title !== name);
+            } else {
+                this.tableOrder.push({ title: name, width: 150 });
+            }
         }
     }
 </script>
