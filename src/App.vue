@@ -1,7 +1,7 @@
 <template>
-  <div id="app">
-    <Table />
-  </div>
+    <div id="app">
+        <Table />
+    </div>
 </template>
 
 <script lang="ts">
@@ -17,5 +17,5 @@
     export default class App extends Vue {}
 </script>
 
-<style lang="scss">
+<style lang="scss" src="./scss/main.scss">
 </style>

@@ -30,4 +30,4 @@
 </script>
 
 <style lang="scss" src="./TableHeader.scss">
-</style>a
+</style>

@@ -7,7 +7,7 @@
             <template v-slot="{ data: contacts }">
                 <div>
                     <TableHeader
-                        :order="tableOrder"
+                        :order="tableItems"
                         :sort-by="choice"
                         @change-sort="changeSort"
                     />
@@ -16,7 +16,7 @@
                         v-for="contact in contacts"
                         :key="contact.id"
                         :contact="contact"
-                        :order="tableOrder"
+                        :order="tableItems"
                     />
                 </div>
             </template>
@@ -25,7 +25,8 @@
         <h2>Controls</h2>
         <ItemCheckbox
             :titles="checkboxTitles"
-            @update-table="updateTable" />
+            @update-table="updateTable"
+        />
     </div>
 </template>
 
@@ -33,8 +34,8 @@
     import { Component, Prop, Vue } from '@/vue-script';
 
     const TableData = () => import('./TableData.vue');
-    const TableHeader = () => import('./TableHeader.vue');
-    const TableItem = () => import('./TableItem.vue');
+    const TableHeader = () => import('./header/TableHeader.vue');
+    const TableItem = () => import('./item/TableItem.vue');
     const ItemCheckbox = () => import('./controls/ItemCheckbox.vue');
 
     @Component({
@@ -48,7 +49,7 @@
     export default class Table extends Vue {
         private choice: string | null = null;
         private checkboxTitles: string[] = [];
-        private tableOrder: any[] = [
+        private tableItems: any[] = [
             { title: 'firstName', width: 150 },
             { title: 'lastName', width: 150 },
             { title: 'age', width: 150 },
@@ -65,17 +66,17 @@
         }
 
         private updateTable(name: string) {
-            const tableProperty = this.tableOrder.find((x) => x.title === name);
+            const tableProperty = this.tableItems.find((x) => x.title === name);
 
             if (tableProperty) {
-                this.tableOrder = this.tableOrder.filter((x) => x.title !== name);
+                this.tableItems = this.tableItems.filter((x) => x.title !== name);
             } else {
-                this.tableOrder.push({ title: name, width: 150 });
+                this.tableItems.push({ title: name, width: 150 });
             }
         }
 
         private created() {
-            this.checkboxTitles = this.tableOrder.map((x) => x.title);
+            this.checkboxTitles = this.tableItems.map((x) => x.title);
         }
     }
 </script>

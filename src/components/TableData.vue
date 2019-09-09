@@ -1,8 +1,7 @@
 <script lang="ts">
-    import { Vue, Component, Prop } from '@/vue-script';
+    import { Vue, Component, Prop, Watch } from '@/vue-script';
 
     import { sortBy } from '@/utils/sort-by';
-    import { Watch } from 'vue-property-decorator';
 
     @Component({})
     export default class TableData extends Vue {
