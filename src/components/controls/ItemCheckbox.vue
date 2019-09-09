@@ -1,11 +1,11 @@
 <template>
     <div>
-        <div class="item-checkbox" v-for="item in tableItems">
-            <label for="title">{{ item | splitByUppercase | uppercase }}</label>
+        <div class="item-checkbox" v-for="title in titles">
+            <label for="title">{{ title | splitByUppercase | uppercase }}</label>
             <input
                 type="checkbox"
-                :title="item"
-                @change="$emit('update-table', item)">
+                :title="title"
+                @change="$emit('update-table', title)">
         </div>
     </div>
 </template>
@@ -15,15 +15,7 @@
 
     @Component({})
     export default class ItemCheckbox extends Vue {
-        private tableItems: any[] = [
-            'firstName',
-            'lastName',
-            'age',
-            'company',
-            'email',
-            'phone',
-            'address',
-        ];
+        @Prop({ required: true }) private titles!: string[];
     }
 </script>
 

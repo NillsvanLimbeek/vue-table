@@ -23,7 +23,9 @@
         </TableData>
 
         <h2>Controls</h2>
-        <ItemCheckbox @update-table="updateTable" />
+        <ItemCheckbox
+            :titles="checkboxTitles"
+            @update-table="updateTable" />
     </div>
 </template>
 
@@ -45,14 +47,15 @@
     })
     export default class Table extends Vue {
         private choice: string | null = null;
+        private checkboxTitles: string[] = [];
         private tableOrder: any[] = [
-            { title: 'firstName', width: 150, visible: true },
-            { title: 'lastName', width: 150, visible: true },
-            { title: 'age', width: 150, visible: true },
-            { title: 'company', width: 150, visible: true },
-            { title: 'email', width: 150, visible: true },
-            { title: 'phone', width: 150, visible: true },
-            { title: 'address', width: 150, visible: true },
+            { title: 'firstName', width: 150 },
+            { title: 'lastName', width: 150 },
+            { title: 'age', width: 150 },
+            { title: 'company', width: 150 },
+            { title: 'email', width: 150 },
+            { title: 'phone', width: 150 },
+            { title: 'address', width: 150 },
         ];
 
         private changeSort(sortOrder: string) {
@@ -69,6 +72,10 @@
             } else {
                 this.tableOrder.push({ title: name, width: 150 });
             }
+        }
+
+        private created() {
+            this.checkboxTitles = this.tableOrder.map((x) => x.title);
         }
     }
 </script>
