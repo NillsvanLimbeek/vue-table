@@ -1,13 +1,13 @@
 <template>
     <div class="table-item">
         <div
-            v-for="(el, index) in order"
+            v-for="(item, index) in items"
             :key="index"
-            :style="{ width: el.width + 'px' }"
+            :style="{ width: item.width + 'px' }"
             class="table-item__item"
         >
 
-            {{ contact[el.title] }}
+            {{ contact[item.title] }}
         </div>
     </div>
 </template>
@@ -18,7 +18,7 @@
     @Component({})
     export default class TableItem extends Vue {
         @Prop({ required: true }) private contact!: any;
-        @Prop({ required: true }) private order!: string[];
+        @Prop({ required: true }) private items!: string[];
     }
 </script>
 

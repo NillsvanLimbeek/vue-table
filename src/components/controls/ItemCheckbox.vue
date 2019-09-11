@@ -1,11 +1,26 @@
 <template>
     <div>
-        <div class="item-checkbox" v-for="title in titles">
-            <label for="title">{{ title | splitByUppercase | uppercase }}</label>
-            <input
-                type="checkbox"
-                :title="title"
-                @change="$emit('update-table', title)">
+        <div
+            class="item-checkbox"
+            v-for="(item, index) in items"
+            :key="item.name">
+
+            <div class="item-checkbox__input">
+                <label for="item">{{ item.title | splitByUppercase | uppercase }}</label>
+                <input
+                    type="checkbox"
+                    v-model="items[index].visible"
+                    @change="$emit('update-table', items[index].visible)"
+                >
+            </div>
+
+            <!-- <div class="item-checkbox__input">
+                <label for="position">Position</label>
+                <input
+                    type="number"
+                    name="position"
+                >
+            </div> -->
         </div>
     </div>
 </template>
@@ -15,7 +30,11 @@
 
     @Component({})
     export default class ItemCheckbox extends Vue {
-        @Prop({ required: true }) private titles!: string[];
+        @Prop({ required: true }) private items!: any[];
+
+        private updateOrder(obj: any) {
+            this.$emit('update-order', obj);
+        }
     }
 </script>
 

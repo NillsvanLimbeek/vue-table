@@ -16,7 +16,7 @@
                         v-for="contact in contacts"
                         :key="contact.id"
                         :contact="contact"
-                        :order="tableItems"
+                        :items="tableItems"
                     />
                 </div>
             </template>
@@ -24,7 +24,7 @@
 
         <h2>Controls</h2>
         <ItemCheckbox
-            :titles="checkboxTitles"
+            :items="tableItems"
             @update-table="updateTable"
         />
     </div>
@@ -48,15 +48,14 @@
     })
     export default class Table extends Vue {
         private choice: string | null = null;
-        private checkboxTitles: string[] = [];
         private tableItems: any[] = [
-            { title: 'firstName', width: 150 },
-            { title: 'lastName', width: 150 },
-            { title: 'age', width: 150 },
-            { title: 'company', width: 150 },
-            { title: 'email', width: 150 },
-            { title: 'phone', width: 150 },
-            { title: 'address', width: 150 },
+            { title: 'firstName', width: 150, visible: true },
+            { title: 'lastName', width: 150, visible: true },
+            { title: 'age', width: 150, visible: true },
+            { title: 'company', width: 150, visible: true },
+            { title: 'email', width: 150, visible: true },
+            { title: 'phone', width: 150, visible: true },
+            { title: 'address', width: 150, visible: true },
         ];
 
         private changeSort(sortOrder: string) {
@@ -73,10 +72,6 @@
             } else {
                 this.tableItems.push({ title: name, width: 150 });
             }
-        }
-
-        private created() {
-            this.checkboxTitles = this.tableItems.map((x) => x.title);
         }
     }
 </script>
