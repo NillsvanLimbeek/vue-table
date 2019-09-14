@@ -1,11 +1,13 @@
 <template>
-    <div>
+    <div class="table">
+        <TableControl :items="tableItems" />
+
         <TableData
             url="/contacts.json"
             :sort="choice"
         >
             <template v-slot="{ data: contacts }">
-                <div>
+                <div class="table__body">
                     <TableHeader
                         :items="tableItems"
                         :sort-by="choice"
@@ -19,29 +21,23 @@
                 </div>
             </template>
         </TableData>
-
-        <h2>Controls</h2>
-        <ItemCheckbox
-            :items="tableItems"
-            @update-table="updateTable"
-        />
     </div>
 </template>
 
 <script lang="ts">
     import { Component, Prop, Vue } from '@/vue-script';
 
-    const TableData = () => import('./TableData.vue');
-    const TableHeader = () => import('./header/TableHeader.vue');
-    const ItemCheckbox = () => import('./controls/ItemCheckbox.vue');
-    const TableList = () => import('./list/TableList.vue');
+    const TableData = () => import('@/components/TableData.vue');
+    const TableHeader = () => import('@/components/header/TableHeader.vue');
+    const TableControl = () => import('@/components/controls/TableControl.vue');
+    const TableList = () => import('@/components/list/TableList.vue');
 
     @Component({
         components: {
             TableData,
             TableHeader,
             TableList,
-            ItemCheckbox,
+            TableControl,
         },
     })
     export default class Table extends Vue {
@@ -72,5 +68,5 @@
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" src="./Table.scss">
 </style>

@@ -12,7 +12,7 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
-    const TableItem = () => import('../item/TableItem.vue');
+    const TableItem = () => import('@/components/table-item/TableItem.vue');
 
     @Component({
         components: {

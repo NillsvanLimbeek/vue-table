@@ -7,7 +7,7 @@
 <script lang="ts">
     import { Component, Vue } from '@/vue-script';
 
-    const Table = () => import('@/components/Table.vue');
+    const Table = () => import('@/components/table/Table.vue');
 
     @Component({
         components: {
