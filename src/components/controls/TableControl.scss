@@ -6,10 +6,13 @@
 }
 
 .table-control__header {
-    padding: 15px 20px;
     border-bottom: 1px solid var(--cell-border-color);
+    border-radius: 5px 5px 0 0;
+
+    padding: 15px 20px;
+    background: var(--cell-background-color);
 }
 
 .table-control__body {
-    padding: 0 20px;
+    padding: 10px 20px;
 }
