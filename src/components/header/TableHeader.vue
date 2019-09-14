@@ -2,18 +2,18 @@
     <div class="table-header">
         <div
             class="table-header__item"
-            v-for="(el, index) in order"
+            v-for="(item, index) in filteredItems"
             :key="index"
-            :style="{ width: el.width + 'px' }"
-            @click="$emit('change-sort', el.title)"
+            :style="{ width: item.width + 'px' }"
+            @click="$emit('change-sort', item.title)"
         >
 
-            {{ el.title | splitByUppercase | uppercase }}
+            {{ item.title | splitByUppercase | uppercase }}
 
             <i
-                v-if="sortBy === el.title || sortBy === `-${el.title}`"
+                v-if="sortBy === item.title || sortBy === `-${item.title}`"
                 class="table-header__item-icon fas fa-chevron-up"
-                :class="{ 'table-header__item-icon--rotated': el.title === sortBy }"
+                :class="{ 'table-header__item-icon--rotated': item.title === sortBy }"
             />
         </div>
     </div>
@@ -22,10 +22,16 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
+    import { sortBy } from '@/utils/sort-by';
+
     @Component({})
     export default class TableHeader extends Vue {
-        @Prop({ required: true }) private order!: string[];
+        @Prop({ required: true }) private items!: any[];
         @Prop({ required: true }) private sortBy!: string;
+
+        private get filteredItems() {
+            return sortBy(this.items.filter((x) => x.visible === true), 'order');
+        }
     }
 </script>
 

@@ -10,17 +10,19 @@
                 <input
                     type="checkbox"
                     v-model="items[index].visible"
-                    @change="$emit('update-table', items[index].visible)"
+                    @change="$emit('update-table', {title: item.title, visible: item.visible})"
                 >
             </div>
 
-            <!-- <div class="item-checkbox__input">
+            <div class="item-checkbox__input">
                 <label for="position">Position</label>
                 <input
                     type="number"
+                    v-model="items[index].order"
                     name="position"
+                    @blur="$emit('update-order', { title: item.title, order: item.order })"
                 >
-            </div> -->
+            </div>
         </div>
     </div>
 </template>
@@ -31,10 +33,6 @@
     @Component({})
     export default class ItemCheckbox extends Vue {
         @Prop({ required: true }) private items!: any[];
-
-        private updateOrder(obj: any) {
-            this.$emit('update-order', obj);
-        }
     }
 </script>
 

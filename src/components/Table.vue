@@ -7,16 +7,14 @@
             <template v-slot="{ data: contacts }">
                 <div>
                     <TableHeader
-                        :order="tableItems"
+                        :items="tableItems"
                         :sort-by="choice"
                         @change-sort="changeSort"
                     />
 
-                    <TableItem
-                        v-for="contact in contacts"
-                        :key="contact.id"
-                        :contact="contact"
-                        :items="tableItems"
+                    <TableList
+                        :contacts="contacts"
+                        :table-items="tableItems"
                     />
                 </div>
             </template>
@@ -35,27 +33,27 @@
 
     const TableData = () => import('./TableData.vue');
     const TableHeader = () => import('./header/TableHeader.vue');
-    const TableItem = () => import('./item/TableItem.vue');
     const ItemCheckbox = () => import('./controls/ItemCheckbox.vue');
+    const TableList = () => import('./list/TableList.vue');
 
     @Component({
         components: {
             TableData,
             TableHeader,
-            TableItem,
+            TableList,
             ItemCheckbox,
         },
     })
     export default class Table extends Vue {
         private choice: string | null = null;
         private tableItems: any[] = [
-            { title: 'firstName', width: 150, visible: true },
-            { title: 'lastName', width: 150, visible: true },
-            { title: 'age', width: 150, visible: true },
-            { title: 'company', width: 150, visible: true },
-            { title: 'email', width: 150, visible: true },
-            { title: 'phone', width: 150, visible: true },
-            { title: 'address', width: 150, visible: true },
+            { title: 'firstName', width: 150, visible: true, order: 1 },
+            { title: 'lastName', width: 150, visible: true, order: 2 },
+            { title: 'age', width: 150, visible: true, order: 3 },
+            { title: 'company', width: 150, visible: true, order: 4 },
+            { title: 'email', width: 150, visible: true, order: 5 },
+            { title: 'phone', width: 150, visible: true, order: 6 },
+            { title: 'address', width: 150, visible: true, order: 7 },
         ];
 
         private changeSort(sortOrder: string) {
@@ -64,13 +62,11 @@
                 : (this.choice = sortOrder);
         }
 
-        private updateTable(name: string) {
+        private updateTable(name: string, visible: boolean) {
             const tableProperty = this.tableItems.find((x) => x.title === name);
 
             if (tableProperty) {
-                this.tableItems = this.tableItems.filter((x) => x.title !== name);
-            } else {
-                this.tableItems.push({ title: name, width: 150 });
+                tableProperty.visible = visible;
             }
         }
     }

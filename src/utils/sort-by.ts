@@ -3,7 +3,7 @@ export function sortBy(arr: any, type: string): any[] {
         let objA;
         let objB;
 
-        if (type === 'age') {
+        if (type === 'age' || type === 'order') {
             objA = a[type];
             objB = b[type];
         } else {
