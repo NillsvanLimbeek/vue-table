@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Vue, Component, Prop, Watch } from '@/vue-script';
 
-    import { sortBy } from '@/utils/sort-by';
+    import { sortSingle } from '@/utils';
 
     @Component({})
     export default class TableData extends Vue {
@@ -14,7 +14,7 @@
         private sortData(): void {
             this.sort[0] === '-'
                 ? this.data.reverse()
-                : (this.data = sortBy(this.data, this.sort));
+                : (this.data = sortSingle(this.data, this.sort));
         }
 
         private created(): void {

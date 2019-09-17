@@ -17,7 +17,7 @@
 
     import { TableItem } from '@/data';
 
-    import { sortBy } from '@/utils/sort-by';
+    import { sortSingle } from '@/utils';
 
     @Component({})
     export default class TableListItem extends Vue {
@@ -25,7 +25,10 @@
         @Prop({ required: true }) private items!: TableItem[];
 
         private get filteredItems(): TableItem[] {
-            return sortBy(this.items.filter((x) => x.visible === true), 'order');
+            return sortSingle(
+                this.items.filter((x) => x.visible === true),
+                'order',
+            );
         }
     }
 </script>

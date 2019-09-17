@@ -13,7 +13,7 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
-    import { sortBy } from '@/utils/sort-by';
+    import { sortSingle } from '@/utils';
 
     import { TableItem } from '@/data';
 
@@ -29,7 +29,10 @@
         @Prop({ required: true }) private sortBy!: string;
 
         private get filteredItems(): TableItem[] {
-            return sortBy(this.items.filter((x) => x.visible === true), 'order');
+            return sortSingle(
+                this.items.filter((x) => x.visible === true),
+                'order',
+            );
         }
 
         private sortItems(title: string): void {

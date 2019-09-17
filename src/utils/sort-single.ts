@@ -1,8 +1,9 @@
-export function sortBy(arr: any, type: string): any[] {
+export function sortSingle(arr: any, type: string): any[] {
     return arr.sort((a: any, b: any) => {
         let objA;
         let objB;
 
+        // TODO make generic
         if (type === 'age' || type === 'order') {
             objA = a[type];
             objB = b[type];

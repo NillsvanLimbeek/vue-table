@@ -1,6 +1,6 @@
 import { SortBy } from '@/data';
 
-export function sortByMultiple(arr: any[], sortBy: SortBy[]) {
+export function sortMultiple(arr: any[], sortBy: SortBy[]) {
     arr.sort((a, b) => {
         let i = 0;
         let result = 0;
