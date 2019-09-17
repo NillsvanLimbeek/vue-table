@@ -11,13 +11,13 @@
         private data: any | null = null;
 
         @Watch('sort')
-        private sortData() {
+        private sortData(): void {
             this.sort[0] === '-'
                 ? this.data.reverse()
                 : (this.data = sortBy(this.data, this.sort));
         }
 
-        private created() {
+        private created(): void {
             fetch(this.url)
                 .then((response) => response.json())
                 .then((response) => (this.data = response));
