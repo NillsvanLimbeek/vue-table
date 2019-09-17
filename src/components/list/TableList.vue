@@ -1,6 +1,6 @@
 <template>
     <div class="table-list">
-        <TableItem
+        <TableListItem
             v-for="contact in contacts"
             :key="contact.id"
             :contact="contact"
@@ -12,16 +12,18 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
-    const TableItem = () => import('@/components/table-item/TableItem.vue');
+    import { TableItem } from '@/data';
+
+    const TableListItem = () => import('@/components/table-item/TableListItem.vue');
 
     @Component({
         components: {
-            TableItem,
+            TableListItem,
         },
     })
     export default class TableList extends Vue {
         @Prop({ required: true }) private contacts!: any[];
-        @Prop({ required: true }) private tableItems!: any[];
+        @Prop({ required: true }) private tableItems!: TableItem[];
     }
 </script>
 

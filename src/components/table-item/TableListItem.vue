@@ -1,10 +1,10 @@
 <template>
-    <div class="table-item">
+    <div class="table-list-item">
         <div
             v-for="(item, index) in filteredItems"
             :key="index"
             :style="{ width: item.width + 'px' }"
-            class="table-item__item"
+            class="table-list-item__item"
         >
 
             {{ contact[item.title] }}
@@ -15,18 +15,20 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
+    import { TableItem } from '@/data';
+
     import { sortBy } from '@/utils/sort-by';
 
     @Component({})
-    export default class TableItem extends Vue {
+    export default class TableListItem extends Vue {
         @Prop({ required: true }) private contact!: any;
-        @Prop({ required: true }) private items!: any[];
+        @Prop({ required: true }) private items!: TableItem[];
 
-        private get filteredItems() {
+        private get filteredItems(): TableItem[] {
             return sortBy(this.items.filter((x) => x.visible === true), 'order');
         }
     }
 </script>
 
-<style lang="scss" src="./TableItem.scss">
+<style lang="scss" src="./TableListItem.scss">
 </style>

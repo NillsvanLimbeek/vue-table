@@ -27,6 +27,8 @@
 <script lang="ts">
     import { Component, Prop, Vue } from '@/vue-script';
 
+    import { TableItem } from '@/data';
+
     const TableData = () => import('@/components/TableData.vue');
     const TableHeader = () => import('@/components/header/TableHeader.vue');
     const TableControl = () => import('@/components/controls/TableControl.vue');
@@ -42,7 +44,7 @@
     })
     export default class Table extends Vue {
         private choice: string | null = null;
-        private tableItems: any[] = [
+        private tableItems: TableItem[] = [
             { title: 'firstName', width: 150, visible: true, order: 1 },
             { title: 'lastName', width: 150, visible: true, order: 2 },
             { title: 'age', width: 150, visible: true, order: 3 },
@@ -52,13 +54,13 @@
             { title: 'address', width: 150, visible: true, order: 7 },
         ];
 
-        private changeSort(sortOrder: string) {
+        private changeSort(sortOrder: string): void {
             this.choice === sortOrder
                 ? (this.choice = `-${sortOrder}`)
                 : (this.choice = sortOrder);
         }
 
-        private updateTable(name: string, visible: boolean) {
+        private updateTable(name: string, visible: boolean): void {
             const tableProperty = this.tableItems.find((x) => x.title === name);
 
             if (tableProperty) {

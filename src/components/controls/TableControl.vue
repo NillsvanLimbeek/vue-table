@@ -5,7 +5,7 @@
         </div>
 
         <div class="table-control__body">
-            <ControlItem
+            <TableControlItem
                 v-for="(item, index) in items"
                 :key="index"
                 :item="item"
@@ -19,15 +19,18 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
-    const ControlItem = () => import('@/components/control-item/ControlItem.vue');
+    import { TableItem } from '@/data';
+
+    const TableControlItem = () =>
+        import('@/components/control-item/TableControlItem.vue');
 
     @Component({
         components: {
-            ControlItem,
+            TableControlItem,
         },
     })
     export default class TableControl extends Vue {
-        @Prop({ required: true }) private items!: any[];
+        @Prop({ required: true }) private items!: TableItem[];
 
         private updateTable() {
             //

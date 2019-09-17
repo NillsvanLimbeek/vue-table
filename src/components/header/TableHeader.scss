@@ -2,26 +2,3 @@
     display: flex;
     flex: 1 0 auto;
 }
-
-.table-header__item {
-    display: flex;
-    justify-content: space-between;
-
-    background: var(--cell-background-color);
-    border: 1px solid var(--cell-border-color);
-    border-width: 1px 0 1px 1px;
-    padding: 15px 20px;
-}
-
-.table-header__item:first-child {
-    border-radius: 5px 0 0 0;
-}
-
-.table-header__item:last-child {
-    border-right: 1px solid var(--cell-border-color);
-    border-radius: 0 5px 0 0;
-}
-
-.table-header__item-icon--rotated {
-    transform: rotate(180deg);
-}

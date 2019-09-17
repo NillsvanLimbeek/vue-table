@@ -1,9 +1,9 @@
-.control-item {
+.table-control-item {
     display: flex;
     justify-content: space-between;
 }
 
-.control-item__input {
+.table-control-item__input {
     display: flex;
     align-items: center;
 
@@ -11,6 +11,6 @@
     margin-right: 10px;
 }
 
-.control-item__input label {
+.table-control-item__input label {
     margin-right: 5px;
 }
