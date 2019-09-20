@@ -5,7 +5,7 @@
             :key="index"
             :item="item"
             :sort-by="sortBy"
-            @sort="sortItems"
+            @sort="$emit('sort', $event)"
         />
     </div>
 </template>
@@ -33,10 +33,6 @@
                 this.items.filter((x) => x.visible === true),
                 'order',
             );
-        }
-
-        private sortItems(title: string): void {
-            this.$emit('change-sort', title);
         }
     }
 </script>

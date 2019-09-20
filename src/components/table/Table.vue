@@ -4,14 +4,14 @@
 
         <TableData
             url="/contacts.json"
-            :sort="choice"
+            :sort="sort"
         >
             <template v-slot="{ data: contacts }">
                 <div class="table__body">
                     <TableHeader
                         :items="tableItems"
-                        :sort-by="choice"
-                        @change-sort="changeSort"
+                        :sort-by="sort"
+                        @sort="sort = $event"
                     />
 
                     <TableList
@@ -27,7 +27,7 @@
 <script lang="ts">
     import { Component, Prop, Vue } from '@/vue-script';
 
-    import { TableItem } from '@/data';
+    import { TableItem, SortBy } from '@/data';
 
     const TableData = () => import('@/components/TableData.vue');
     const TableHeader = () => import('@/components/header/TableHeader.vue');
@@ -43,7 +43,8 @@
         },
     })
     export default class Table extends Vue {
-        private choice: string | null = null;
+        private sort: SortBy | SortBy[] | null = null;
+
         private tableItems: TableItem[] = [
             { title: 'firstName', width: 150, visible: true, order: 1 },
             { title: 'lastName', width: 150, visible: true, order: 2 },
@@ -53,12 +54,6 @@
             { title: 'phone', width: 150, visible: true, order: 6 },
             { title: 'address', width: 150, visible: true, order: 7 },
         ];
-
-        private changeSort(sortOrder: string): void {
-            this.choice === sortOrder
-                ? (this.choice = `-${sortOrder}`)
-                : (this.choice = sortOrder);
-        }
 
         private updateTable(name: string, visible: boolean): void {
             const tableProperty = this.tableItems.find((x) => x.title === name);

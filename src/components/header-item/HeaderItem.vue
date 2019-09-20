@@ -17,20 +17,53 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
-    import { TableItem } from '@/data';
+    import { TableItem, SortBy } from '@/data';
 
     @Component({})
     export default class HeaderItem extends Vue {
         @Prop({ required: true }) private item!: TableItem;
-        @Prop({ required: true }) private sortBy!: any;
+        @Prop({ required: true }) private sortBy!: SortBy[] | null;
 
         private sortItems(e: MouseEvent): void {
-            if (e.shiftKey) {
-                const titles: string[] = [this.sortBy, this.item.title];
-                this.$emit('sort', titles);
+            let sort: SortBy[] = [];
+
+            if (this.sortBy) {
+                if (e.shiftKey) {
+                    sort = this.multipleSort(this.sortBy);
+                } else {
+                    sort = [this.singleSort(this.sortBy[0])];
+                }
             } else {
-                this.$emit('sort', this.item.title);
+                sort = [{ title: this.item.title, direction: 1 }];
             }
+
+            this.$emit('sort', sort);
+        }
+
+        private singleSort(sortArr: SortBy): SortBy {
+            return sortArr.direction === 1
+                ? { title: this.item.title, direction: -1 }
+                : { title: this.item.title, direction: 1 };
+        }
+
+        private multipleSort(sortArr: SortBy[]): SortBy[] {
+            const sort: SortBy[] = [];
+
+            const titles: string[] = sortArr.map((x) => x.title);
+
+            if (!titles.includes(this.item.title)) {
+                sort.push({ title: this.item.title, direction: 1 });
+            } else {
+                const item = sortArr.find((x) => x.title === this.item.title);
+
+                if (item) {
+                    item.direction === 1
+                        ? (item.direction = -1)
+                        : (item.direction = 1);
+                }
+            }
+
+            return [...sortArr, ...sort];
         }
     }
 </script>

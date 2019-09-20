@@ -1,16 +1,7 @@
 export function sortSingle(arr: any, type: string): any[] {
     return arr.sort((a: any, b: any) => {
-        let objA;
-        let objB;
-
-        // TODO make generic
-        if (type === 'age' || type === 'order') {
-            objA = a[type];
-            objB = b[type];
-        } else {
-            objA = a[type].toUpperCase();
-            objB = b[type].toUpperCase();
-        }
+        const objA = a[type].toString().toUpperCase();
+        const objB = b[type].toString().toUpperCase();
 
         if (objA < objB) {
             return -1;
