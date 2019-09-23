@@ -13,9 +13,10 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
+    import { TableItem } from '@/data';
     import { sortSingle } from '@/utils';
 
-    import { TableItem } from '@/data';
+    import { SortBy } from '@/data';
 
     const HeaderItem = () => import('@/components/header-item/HeaderItem.vue');
 
@@ -26,7 +27,7 @@
     })
     export default class TableHeader extends Vue {
         @Prop({ required: true }) private items!: TableItem[];
-        @Prop({ required: true }) private sortBy!: string;
+        @Prop({ required: true }) private sortBy!: SortBy[];
 
         private get filteredItems(): TableItem[] {
             return sortSingle(
