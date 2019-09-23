@@ -10,8 +10,6 @@ import {
     Prop,
     Provide,
     Watch,
-    ProvideReactive,
-    InjectReactive,
 } from 'vue-property-decorator';
 
 // import { State, Getter, Action, Mutation, namespace } from 'vuex-class';
@@ -32,6 +30,4 @@ export {
     Watch,
     createDecorator,
     mixins,
-    ProvideReactive,
-    InjectReactive,
 };

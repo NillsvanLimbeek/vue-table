@@ -1,4 +1,4 @@
-export default function splitByUppercase(str: string) {
+export default function splitByUppercase(str: string): string {
     return str
         .split(/(?=[A-Z])/)
         .map((x) => x.toLowerCase())
