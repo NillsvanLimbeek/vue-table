@@ -2,14 +2,15 @@
     <div
         class="header-item"
         :style="{ width: item.width + 'px' }"
-        @click="sortItems">
+        @click="sortItems"
+    >
 
         {{ item.title | splitByUppercase | uppercase }}
 
         <i
-            v-if="sortBy === item.title || sortBy === `-${item.title}`"
+            v-if="showArrow"
             class="header-item__icon fas fa-chevron-up"
-            :class="{ 'header-item__icon--rotated': item.title === sortBy }"
+            :class="{ 'header-item__icon--rotated': arrowDirection === -1 }"
         />
     </div>
 </template>
@@ -23,6 +24,26 @@
     export default class HeaderItem extends Vue {
         @Prop({ required: true }) private item!: TableItem;
         @Prop({ required: true }) private sortBy!: SortBy[] | null;
+
+        private get showArrow() {
+            if (this.sortBy) {
+                const titles: string[] = this.sortBy.map((x) => x.title);
+                return (
+                    titles.includes(this.item.title) ||
+                    titles.includes(`-${this.item.title}`)
+                );
+            }
+        }
+
+        private get arrowDirection(): number | undefined {
+            if (this.sortBy) {
+                const sort = this.sortBy.find((x) => x.title === this.item.title);
+
+                if (sort) {
+                    return sort.direction;
+                }
+            }
+        }
 
         private sortItems(e: MouseEvent): void {
             let sort: SortBy[] = [];
