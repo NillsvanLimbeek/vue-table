@@ -12,6 +12,16 @@
                 @update-table="updateTable"
                 @update-order="updateOrder"
             />
+
+            <div class="table-control__search">
+                <label for="search">Search:</label>
+                <input
+                    type="text"
+                    name="search"
+                    v-model="search"
+                    @input="$emit('search', search)"
+                >
+            </div>
         </div>
     </div>
 </template>
@@ -31,6 +41,8 @@
     })
     export default class TableControl extends Vue {
         @Prop({ required: true }) private items!: TableItem[];
+
+        private search: string = '';
 
         private updateTable() {
             //

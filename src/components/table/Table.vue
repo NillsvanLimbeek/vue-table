@@ -1,12 +1,15 @@
 <template>
     <div class="table">
-        <TableControl :items="tableItems" />
+        <TableControl
+            :items="tableItems"
+            @search="search = $event"
+        />
 
         <TableData
             url="/contacts.json"
             :sort="sort"
         >
-            <template v-slot="{ data: contacts }">
+            <template v-slot="{ data: contacts, searchData: searchContacts }">
                 <div class="table__body">
                     <TableHeader
                         :items="tableItems"
@@ -17,6 +20,7 @@
                     <TableList
                         :contacts="contacts"
                         :table-items="tableItems"
+                        :search="search"
                     />
                 </div>
             </template>
@@ -44,6 +48,7 @@
     })
     export default class Table extends Vue {
         private sort: SortBy | SortBy[] | null = null;
+        private search: string = '';
 
         private tableItems: TableItem[] = [
             { title: 'firstName', width: 150, visible: true, order: 1 },

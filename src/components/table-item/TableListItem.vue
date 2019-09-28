@@ -23,6 +23,7 @@
     export default class TableListItem extends Vue {
         @Prop({ required: true }) private contact!: any;
         @Prop({ required: true }) private items!: TableItem[];
+        @Prop() private search!: string;
 
         private get filteredItems(): TableItem[] {
             return sortSingle(
