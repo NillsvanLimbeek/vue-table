@@ -12,3 +12,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
+
+.table-list-item__item:last-child {
+    border-right: 1px solid var(--cell-border-color);
+}

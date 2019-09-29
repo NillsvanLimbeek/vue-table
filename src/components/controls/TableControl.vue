@@ -19,8 +19,9 @@
                     <input
                         type="text"
                         name="search"
-                        v-model="search"
+                        v-model="search.string"
                         @input="$emit('search', search)"
+                        autocomplete="off"
                     >
                 </div>
 
@@ -28,10 +29,10 @@
                     <label for="search">Property: </label>
 
                     <select
-                        @change="searchProperty = $event.target.value"
-                        v-model="searchProperty"
+                        v-model="search.property"
+                        @change="search.property = $event.target.value"
                         name="property"
-                        id="property">
+                    >
 
                         <option
                             v-for="item in searchSelectItems"
@@ -49,7 +50,7 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
-    import { TableItem } from '@/data';
+    import { TableItem, SearchFor } from '@/data';
 
     const TableControlItem = () =>
         import('@/components/control-item/TableControlItem.vue');
@@ -62,9 +63,7 @@
     export default class TableControl extends Vue {
         @Prop({ required: true }) private items!: TableItem[];
 
-        private search: string = '';
-        private searchProperty: string = '';
-
+        private search: SearchFor = { property: 'firstName' };
         private searchSelectItems: any[] = [
             { title: 'First name', property: 'firstName' },
             { title: 'Last name', property: 'lastName' },

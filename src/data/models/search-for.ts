@@ -1,4 +1,4 @@
 export interface SearchFor {
+    string?: string;
     property: string;
-    string: string;
 }

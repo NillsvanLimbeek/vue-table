@@ -1,7 +1,7 @@
 <template>
     <div class="table-list">
         <TableListItem
-            v-for="contact in searchedContacts"
+            v-for="contact in searchContacts"
             :key="contact.id"
             :contact="contact"
             :items="tableItems"
@@ -12,7 +12,7 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
-    import { TableItem } from '@/data';
+    import { TableItem, SearchFor } from '@/data';
 
     const TableListItem = () => import('@/components/table-item/TableListItem.vue');
 
@@ -24,12 +24,19 @@
     export default class TableList extends Vue {
         @Prop({ required: true }) private contacts!: any[];
         @Prop({ required: true }) private tableItems!: TableItem[];
-        @Prop() private search!: string;
+        @Prop() private search!: SearchFor;
 
-        private get searchedContacts() {
-            return this.contacts.filter((x) =>
-                x.firstName.toLowerCase().startsWith(this.search),
-            );
+        private get searchContacts() {
+            if (this.search.string) {
+                return this.contacts.filter((x) =>
+                    x[this.search.property]
+                        .toString()
+                        .toLowerCase()
+                        .startsWith(this.search.string),
+                );
+            }
+
+            return this.contacts;
         }
     }
 </script>
