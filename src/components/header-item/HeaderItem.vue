@@ -12,6 +12,11 @@
             class="header-item__icon fas fa-chevron-up"
             :class="{ 'header-item__icon--rotated': arrowDirection === -1 }"
         />
+
+        <div
+            class="header-item__resize-handle"
+            @mousedown="resizeItem"
+        />
     </div>
 </template>
 
@@ -85,6 +90,29 @@
             }
 
             return [...sortArr, ...sort];
+        }
+
+        // TODO
+        private resizeItem() {
+            const element = document.querySelector('.header-item') as HTMLElement;
+            const resizer = document.querySelector('.header-item__resize-handle');
+
+            if (element && resizer) {
+                resizer.addEventListener('mousedown', (e) => {
+                    e.preventDefault();
+                    window.addEventListener('mousemove', resize);
+                    window.addEventListener('mouseup', stopResize);
+                });
+            }
+
+            function resize(e) {
+                element.style.width =
+                    e.pageX - element.getBoundingClientRect().left + 'px';
+            }
+
+            function stopResize() {
+                window.removeEventListener('mousemove', resize);
+            }
         }
     }
 </script>
