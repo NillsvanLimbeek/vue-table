@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Vue, Component, Prop, Watch } from '@/vue-script';
+    import { ScopedSlotChildren } from 'vue/types/vnode';
 
     import { sortSingle, sortMultiple } from '@/utils';
 
@@ -31,7 +32,7 @@
                 .then((response) => (this.data = response));
         }
 
-        private render() {
+        private render(): ScopedSlotChildren {
             if (this.$scopedSlots.default) {
                 return this.$scopedSlots.default({
                     data: this.data,

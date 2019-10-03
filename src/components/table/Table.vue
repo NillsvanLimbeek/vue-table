@@ -9,7 +9,7 @@
             url="/contacts.json"
             :sort="sort"
         >
-            <template v-slot="{ data: contacts, searchData: searchContacts }">
+            <template v-slot="{ data: contacts }">
                 <div class="table__body">
                     <TableHeader
                         :items="tableItems"
@@ -59,14 +59,6 @@
             { title: 'phone', width: 150, visible: true, order: 6 },
             { title: 'address', width: 150, visible: true, order: 7 },
         ];
-
-        private updateTable(name: string, visible: boolean): void {
-            const tableProperty = this.tableItems.find((x) => x.title === name);
-
-            if (tableProperty) {
-                tableProperty.visible = visible;
-            }
-        }
     }
 </script>
 
