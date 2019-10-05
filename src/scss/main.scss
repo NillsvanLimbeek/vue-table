@@ -1,4 +1,21 @@
+html {
+    // 1REM
+    font-size: 62.5%;
+}
+
+body {
+    font-size: 1.6rem;
+}
+
 :root {
+    --color-white: #fff;
+    --color-grey: #b9b9b9;
+
+    --border-color: #b9b9b9;
+
+    --checkbox-green: #00b55d;
+    --checkbox-green-dark: #007f5b4d;
+
     --cell-background-color: #f3f3f3;
     --cell-border-color: #b9b9b9;
     --cell-border-color-light: #cecece;
