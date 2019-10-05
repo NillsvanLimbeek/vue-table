@@ -1,9 +1,5 @@
 <template>
     <div class="table-control">
-        <div class="table-control__header">
-            Controls
-        </div>
-
         <div class="table-control__body">
             <TableControlItem
                 v-for="(item, index) in items"
