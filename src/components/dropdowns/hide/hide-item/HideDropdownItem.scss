@@ -1,3 +1,18 @@
 .hide-dropdown-item {
-    @include flex-center-align;
+    @include flex-align;
+    // justify-content: space-between;
+
+    padding: 5px 1rem;
+}
+
+.hide-dropdown-item__body {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+.hide-dropdown-item span {
+    flex: 0 0 auto;
+    margin: 0 2rem 0 1rem;
 }

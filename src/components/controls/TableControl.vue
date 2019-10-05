@@ -41,7 +41,7 @@
             </div>
         </div> -->
 
-        <HideDropdown />
+        <HideDropdown :items="items" />
     </div>
 </template>
 
