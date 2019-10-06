@@ -1,9 +1,11 @@
 <template>
     <div class="hide-dropdown-item">
-        <Checkbox :active="item.active" />
+        <Checkbox
+            @click="toggleVisibility"
+            :active="item.visible" />
 
         <div class="hide-dropdown-item__body">
-            <span>
+            <span @click="toggleVisibility">
                 {{ item.title | splitByUppercase | uppercase }}
             </span>
 
@@ -16,6 +18,7 @@
     import { Vue, Component, Prop } from '@/vue-script';
 
     import { TableItem } from '@/data';
+    import { EventBus } from '@/event-bus';
 
     const Checkbox = () => import('@/components/checkbox/Checkbox.vue');
 
@@ -26,6 +29,12 @@
     })
     export default class HideDropdownItem extends Vue {
         @Prop({ required: true }) private item!: TableItem;
+
+        private toggleVisibility() {
+            const visible = this.item.visible ? false : true;
+
+            EventBus.$emit('visible', { title: this.item.title, visible });
+        }
     }
 </script>
 
