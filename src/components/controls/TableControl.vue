@@ -1,10 +1,6 @@
 <template>
     <div class="table-control">
-        <div class="table-control__header">
-            Controls
-        </div>
-
-        <div class="table-control__body">
+        <!-- <div class="table-control__body">
             <TableControlItem
                 v-for="(item, index) in items"
                 :key="index"
@@ -43,7 +39,9 @@
                     </select>
                 </div>
             </div>
-        </div>
+        </div> -->
+
+        <HideDropdown :items="items" />
     </div>
 </template>
 
@@ -54,10 +52,13 @@
 
     const TableControlItem = () =>
         import('@/components/control-item/TableControlItem.vue');
+    const HideDropdown = () =>
+        import('@/components/dropdowns/hide/HideDropdown.vue');
 
     @Component({
         components: {
             TableControlItem,
+            HideDropdown,
         },
     })
     export default class TableControl extends Vue {

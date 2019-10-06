@@ -32,6 +32,7 @@
     import { Component, Prop, Vue } from '@/vue-script';
 
     import { TableItem, SortBy } from '@/data';
+    import { EventBus } from '@/event-bus';
 
     const TableData = () => import('@/components/TableData.vue');
     const TableHeader = () => import('@/components/header/TableHeader.vue');
@@ -59,6 +60,24 @@
             { title: 'phone', width: 150, visible: true, order: 6 },
             { title: 'address', width: 150, visible: true, order: 7 },
         ];
+
+        private created() {
+            EventBus.$on('visible', (payload) => {
+                if (typeof payload === 'boolean') {
+                    this.tableItems.forEach((item) => {
+                        item.visible = payload;
+                    });
+                } else {
+                    const item = this.tableItems.find(
+                        (x) => x.title === payload.title,
+                    );
+
+                    if (item) {
+                        item.visible = payload.visible;
+                    }
+                }
+            });
+        }
     }
 </script>
 

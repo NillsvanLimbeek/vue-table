@@ -1,0 +1,32 @@
+.dropdown {
+    position: relative;
+}
+
+.dropdown__button {
+    padding: 5px 1rem;
+    border-radius: 3px;
+
+    &:hover {
+        background: var(--color-grey);
+    }
+}
+
+.dropdown__body {
+    position: absolute;
+    top: 2.5rem;
+    left: 0;
+    z-index: 10;
+
+    padding: 5px 1rem;
+    background: var(--color-white);
+    border: 1px solid var(--border-color);
+}
+
+.dropdown__background {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    height: 100vh;
+    width: 100vw;
+}

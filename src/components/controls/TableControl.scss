@@ -1,22 +1,24 @@
 .table-control {
+    display: flex;
+
     border: 1px solid var(--cell-border-color);
     border-radius: 5px 5px 0 0;
 
-    margin-right: 20px;
+    padding: 1rem;
 }
 
 .table-control__header {
     border-bottom: 1px solid var(--cell-border-color);
     border-radius: 5px 5px 0 0;
 
-    padding: 15px 20px;
+    padding: 1.5rem 2rem;
     background: var(--cell-background-color);
 }
 
 .table-control__body {
-    padding: 10px 20px;
+    padding: 1rem 2rem;
 }
 
 .table-control__search {
-    margin-top: 25px;
+    margin-top: 2.5rem;
 }
