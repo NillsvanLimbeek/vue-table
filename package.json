@@ -20,7 +20,7 @@
         "sass": "^1.23.0",
         "sass-loader": "^8.0.0",
         "style-resources-loader": "^1.2.1",
-        "typescript": "^3.6.3",
+        "typescript": "^3.6.4",
         "vue-template-compiler": "^2.6.10"
     }
 }
