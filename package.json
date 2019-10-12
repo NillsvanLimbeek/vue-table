@@ -16,19 +16,13 @@
         "vuedraggable": "^2.23.2"
     },
     "devDependencies": {
-        "@babel/core": "^7.6.4",
-        "@types/jest": "^24.0.18",
-        "@vue/cli-plugin-babel": "^3.11.0",
-        "@vue/cli-plugin-typescript": "^3.11.0",
-        "@vue/cli-plugin-unit-jest": "^3.12.0",
-        "@vue/cli-service": "^3.11.0",
-        "@vue/test-utils": "^1.0.0-beta.29",
-        "babel-core": "^7.0.0-bridge.0",
+        "@vue/cli-plugin-babel": "^3.12.0",
+        "@vue/cli-plugin-typescript": "^3.12.0",
+        "@vue/cli-service": "^3.12.0",
         "sass": "^1.23.0",
         "sass-loader": "^8.0.0",
         "style-resources-loader": "^1.2.1",
-        "ts-jest": "^23.0.0",
-        "typescript": "^3.6.3",
+        "typescript": "^3.6.4",
         "vue-template-compiler": "^2.6.10"
     }
 }
