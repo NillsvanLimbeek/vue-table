@@ -5,12 +5,12 @@
                 v-model="dragItems"
                 v-bind="dragOptions"
                 @start="drag = true"
-                @end="onDragEnd"
+                @end="drag = false"
             >
                 <transition-group :name="!drag ? 'flip-list' : null">
                     <HideDropdownItem
                         v-for="item in items"
-                        :key="item.order"
+                        :key="item.title"
                         :item="item"
                     />
                 </transition-group>
@@ -45,7 +45,7 @@
 
         private drag: boolean = false;
 
-        private get dropdownTitle() {
+        private get dropdownTitle(): string {
             const num = this.items.filter((x) => x.visible === false).length;
 
             if (num === 1) {
@@ -70,14 +70,12 @@
         }
 
         private set dragItems(value: any) {
-            console.log(value);
+            this.items = value;
+            console.log(this.items.findIndex('firstName'));
+            // EventBus.$emit('order', value);
         }
 
-        private onDragEnd(e: any) {
-            // console.log(e);
-        }
-
-        private toggleAll(toggle: boolean) {
+        private toggleAll(toggle: boolean): void {
             EventBus.$emit('visible', toggle);
         }
     }

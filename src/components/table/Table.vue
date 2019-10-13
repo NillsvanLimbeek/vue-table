@@ -62,6 +62,7 @@
         ];
 
         private created() {
+            // visibility
             EventBus.$on('visible', (payload) => {
                 if (typeof payload === 'boolean') {
                     this.tableItems.forEach((item) => {
@@ -76,6 +77,11 @@
                         item.visible = payload.visible;
                     }
                 }
+            });
+
+            // items order
+            EventBus.$on('order', (payload) => {
+                this.tableItems = payload;
             });
         }
     }
