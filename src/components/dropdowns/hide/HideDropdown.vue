@@ -5,12 +5,12 @@
                 v-model="dragItems"
                 v-bind="dragOptions"
                 @start="drag = true"
-                @end="onDragEnd"
+                @end="drag = false"
             >
                 <transition-group :name="!drag ? 'flip-list' : null">
                     <HideDropdownItem
                         v-for="item in items"
-                        :key="item.order"
+                        :key="item.title"
                         :item="item"
                     />
                 </transition-group>
@@ -29,6 +29,7 @@
     import { EventBus } from '@/event-bus';
 
     import Draggable from 'vuedraggable';
+    import { sortSingle } from '../../../utils';
 
     const Dropdown = () => import('@/components/dropdown/Dropdown.vue');
     const HideDropdownItem = () => import('./hide-item/HideDropdownItem.vue');
@@ -45,7 +46,7 @@
 
         private drag: boolean = false;
 
-        private get dropdownTitle() {
+        private get dropdownTitle(): string {
             const num = this.items.filter((x) => x.visible === false).length;
 
             if (num === 1) {
@@ -66,18 +67,26 @@
         }
 
         private get dragItems() {
-            return this.items;
+            return sortSingle(this.items, 'order');
         }
 
         private set dragItems(value: any) {
-            console.log(value);
+            const newOrder: TableItem[] = [];
+            const arr = value.map((x) => x.title);
+
+            this.items.forEach((item) => {
+                const index = arr.indexOf(item.title);
+
+                newOrder.push({
+                    ...item,
+                    order: index,
+                });
+            });
+
+            EventBus.$emit('order', newOrder);
         }
 
-        private onDragEnd(e: any) {
-            // console.log(e);
-        }
-
-        private toggleAll(toggle: boolean) {
+        private toggleAll(toggle: boolean): void {
             EventBus.$emit('visible', toggle);
         }
     }
