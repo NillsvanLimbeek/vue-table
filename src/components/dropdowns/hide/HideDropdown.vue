@@ -29,6 +29,7 @@
     import { EventBus } from '@/event-bus';
 
     import Draggable from 'vuedraggable';
+    import { sortSingle } from '../../../utils';
 
     const Dropdown = () => import('@/components/dropdown/Dropdown.vue');
     const HideDropdownItem = () => import('./hide-item/HideDropdownItem.vue');
@@ -66,13 +67,23 @@
         }
 
         private get dragItems() {
-            return this.items;
+            return sortSingle(this.items, 'order');
         }
 
         private set dragItems(value: any) {
-            this.items = value;
-            console.log(this.items.findIndex('firstName'));
-            // EventBus.$emit('order', value);
+            const newOrder: TableItem[] = [];
+            const arr = value.map((x) => x.title);
+
+            this.items.forEach((item) => {
+                const index = arr.indexOf(item.title);
+
+                newOrder.push({
+                    ...item,
+                    order: index,
+                });
+            });
+
+            EventBus.$emit('order', newOrder);
         }
 
         private toggleAll(toggle: boolean): void {
