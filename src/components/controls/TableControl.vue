@@ -1,47 +1,7 @@
 <template>
     <div class="table-control">
-        <!-- <div class="table-control__body">
-            <TableControlItem
-                v-for="(item, index) in items"
-                :key="index"
-                :item="item"
-                @update-table="updateTable"
-                @update-order="updateOrder"
-            />
-
-            <div class="table-control__search">
-                <div class="table-control__input">
-                    <label for="search">Search: </label>
-                    <input
-                        type="text"
-                        name="search"
-                        v-model="search.string"
-                        @input="$emit('search', search)"
-                        autocomplete="off"
-                    >
-                </div>
-
-                <div class="table-control__select">
-                    <label for="search">Property: </label>
-
-                    <select
-                        v-model="search.property"
-                        @change="search.property = $event.target.value"
-                        name="property"
-                    >
-
-                        <option
-                            v-for="item in searchSelectItems"
-                            :value="item.property"
-                        >
-                            {{ item.title }}
-                        </option>
-                    </select>
-                </div>
-            </div>
-        </div> -->
-
         <HideDropdown :items="items" />
+        <FilterDropdown :items="items" />
     </div>
 </template>
 
@@ -50,15 +10,15 @@
 
     import { TableItem, SearchFor } from '@/data';
 
-    const TableControlItem = () =>
-        import('@/components/control-item/TableControlItem.vue');
     const HideDropdown = () =>
         import('@/components/dropdowns/hide/HideDropdown.vue');
+    const FilterDropdown = () =>
+        import('@/components/dropdowns/filter/FilterDropdown.vue');
 
     @Component({
         components: {
-            TableControlItem,
             HideDropdown,
+            FilterDropdown,
         },
     })
     export default class TableControl extends Vue {
