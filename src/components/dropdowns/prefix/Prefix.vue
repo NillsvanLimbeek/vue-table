@@ -1,10 +1,11 @@
 <template>
     <div class="prefix">
-        <Dropdown title="Prefix">
+        <Dropdown :title="filter.prefix">
             <p
                 class="prefix__item"
                 v-for="(prefix, index) in prefixes"
                 :key="index"
+                @click="$emit('prefix', prefix)"
             >
                 {{ prefix | uppercase }}
             </p>
@@ -13,7 +14,9 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component } from '@/vue-script';
+    import { Vue, Component, Prop } from '@/vue-script';
+
+    import { Prefix, Filter } from '@/data';
 
     const Dropdown = () => import('@/components/dropdown/Dropdown.vue');
 
@@ -22,7 +25,9 @@
             Dropdown,
         },
     })
-    export default class Prefix extends Vue {
+    export default class PrefixDropdown extends Vue {
+        @Prop() private filter!: Filter;
+
         private prefixes: string[] = ['and', 'or'];
     }
 </script>

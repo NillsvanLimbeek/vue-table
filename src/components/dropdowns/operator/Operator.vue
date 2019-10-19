@@ -1,10 +1,11 @@
 <template>
     <div class="operator">
-        <Dropdown title="Operator">
+        <Dropdown :title="filter.operator">
             <p
                 class="operator__item"
                 v-for="(operator, index) in operators"
                 :key="index"
+                @click="$emit('operator', operator)"
             >
 
                 {{ operator }}
@@ -14,7 +15,7 @@
 </template>
 
 <script lang="ts">
-    import { Vue, Component } from '@/vue-script';
+    import { Vue, Component, Prop } from '@/vue-script';
 
     const Dropdown = () => import('@/components/dropdown/Dropdown.vue');
 
@@ -24,6 +25,8 @@
         },
     })
     export default class Operator extends Vue {
+        @Prop() private filter: Filter;
+
         private operators: string[] = [
             'contains...',
             'does not contain...',

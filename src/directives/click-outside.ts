@@ -1,4 +1,3 @@
-/* tslint:disable */
 import Vue from 'vue';
 import { DirectiveOptions } from 'vue';
 

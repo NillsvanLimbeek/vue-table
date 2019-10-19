@@ -1,10 +1,11 @@
 <template>
     <div class="item">
-        <Dropdown title="Item">
+        <Dropdown :title="filter.item | splitByUppercase">
             <p
                 class="item__item"
                 v-for="(item, index) in items"
                 :key="index"
+                @click="$emit('item', item.title)"
             >
                 {{ item.title | splitByUppercase | uppercase }}
             </p>
@@ -15,7 +16,7 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
-    import { TableItem } from '@/data';
+    import { TableItem, Filter } from '@/data';
 
     const Dropdown = () => import('@/components/dropdown/Dropdown.vue');
 
@@ -26,6 +27,7 @@
     })
     export default class Item extends Vue {
         @Prop({ required: true }) private items!: TableItem[];
+        @Prop() private filter!: Filter;
     }
 </script>
 
