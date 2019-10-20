@@ -14,8 +14,13 @@ export const store = Vue.observable({
     filters,
 });
 
-export const mutation = {
+export const mutations = {
     addFilter(filter: Filter) {
         store.filters.push(filter);
+    },
+
+    // TODO with index
+    updateFilter(filter: Filter) {
+        store.filters.splice(0, 1, filter);
     },
 };

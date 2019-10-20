@@ -36,12 +36,10 @@
         }
 
         private get arrowDirection(): number | undefined {
-            if (this.sortBy) {
-                const sort = this.sortBy.find((x) => x.title === this.item.title);
+            const sort = this.sortBy?.find((x) => x.title === this.item.title);
 
-                if (sort) {
-                    return sort.direction;
-                }
+            if (sort) {
+                return sort.direction;
             }
         }
 

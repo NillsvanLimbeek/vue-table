@@ -5,7 +5,7 @@
                 class="operator__item"
                 v-for="(operator, index) in operators"
                 :key="index"
-                @click="$emit('operator', operator)"
+                @click="updateFilter(operator)"
             >
 
                 {{ operator }}
@@ -17,6 +17,9 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
+    import { Filter, Operator } from '@/data';
+    import { mutations } from '@/store';
+
     const Dropdown = () => import('@/components/dropdown/Dropdown.vue');
 
     @Component({
@@ -24,8 +27,8 @@
             Dropdown,
         },
     })
-    export default class Operator extends Vue {
-        @Prop() private filter: Filter;
+    export default class OperatorDropdown extends Vue {
+        @Prop() private filter!: Filter;
 
         private operators: string[] = [
             'contains...',
@@ -35,6 +38,11 @@
             'is empty',
             'is not empty',
         ];
+
+        private updateFilter(operator: Operator) {
+            const filter = { ...this.filter, operator };
+            mutations.updateFilter(filter);
+        }
     }
 </script>
 

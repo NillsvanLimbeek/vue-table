@@ -5,7 +5,7 @@
                 class="prefix__item"
                 v-for="(prefix, index) in prefixes"
                 :key="index"
-                @click="$emit('prefix', prefix)"
+                @click="updateFilter(prefix)"
             >
                 {{ prefix | uppercase }}
             </p>
@@ -17,6 +17,7 @@
     import { Vue, Component, Prop } from '@/vue-script';
 
     import { Prefix, Filter } from '@/data';
+    import { mutations } from '@/store';
 
     const Dropdown = () => import('@/components/dropdown/Dropdown.vue');
 
@@ -29,6 +30,11 @@
         @Prop() private filter!: Filter;
 
         private prefixes: string[] = ['and', 'or'];
+
+        private updateFilter(prefix: Prefix) {
+            const filter = { ...this.filter, prefix };
+            mutations.updateFilter(filter);
+        }
     }
 </script>
 

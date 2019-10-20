@@ -5,7 +5,7 @@
                 class="item__item"
                 v-for="(item, index) in items"
                 :key="index"
-                @click="$emit('item', item.title)"
+                @click="updateFilter(item.title)"
             >
                 {{ item.title | splitByUppercase | uppercase }}
             </p>
@@ -17,6 +17,7 @@
     import { Vue, Component, Prop } from '@/vue-script';
 
     import { TableItem, Filter } from '@/data';
+    import { mutations } from '@/store';
 
     const Dropdown = () => import('@/components/dropdown/Dropdown.vue');
 
@@ -28,6 +29,11 @@
     export default class Item extends Vue {
         @Prop({ required: true }) private items!: TableItem[];
         @Prop() private filter!: Filter;
+
+        private updateFilter(item: string) {
+            const filter = { ...this.filter, item };
+            mutations.updateFilter(filter);
+        }
     }
 </script>
 
