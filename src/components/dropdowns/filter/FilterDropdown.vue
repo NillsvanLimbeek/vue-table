@@ -14,6 +14,7 @@
 <script lang="ts">
     import { Vue, Component, Prop } from '@/vue-script';
 
+    import { store, mutations } from '@/store';
     import { TableItem, Filter } from '@/data';
 
     const Dropdown = () => import('@/components/dropdown/Dropdown.vue');
@@ -28,14 +29,8 @@
     export default class FilterDropdown extends Vue {
         @Prop({ required: true }) private items!: TableItem[];
 
-        private filters: Filter[] = [];
-
-        private created() {
-            this.filters.push({
-                item: this.items[0].title,
-                operator: 'contains...',
-                prefix: 'and',
-            });
+        private get filters() {
+            return store.filters;
         }
     }
 </script>
